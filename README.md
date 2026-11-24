@@ -1,6 +1,6 @@
 # Product Catalog
 
-A Next.js Product Catalog assessment application for browsing and managing products from the public [DummyJSON](https://dummyjson.com) Products API.
+A responsive Product Catalog application built with Next.js, React, TypeScript, and the public [DummyJSON](https://dummyjson.com) REST API (`product-catalog-nextjs`).
 
 ## Features
 
