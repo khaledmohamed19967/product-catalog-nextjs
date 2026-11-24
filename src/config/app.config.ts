@@ -18,6 +18,7 @@ export const appConfig = {
     searchDebounceMs: 300,
     fetchPageSize: 100,
   },
+  
 } as const;
 
 export type AppConfig = typeof appConfig;
