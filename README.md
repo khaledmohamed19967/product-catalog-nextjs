@@ -1,36 +1,94 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Product Catalog
 
-## Getting Started
+A Next.js Product Catalog assessment application for browsing and managing products from the public [DummyJSON](https://dummyjson.com) Products API.
 
-First, run the development server:
+## Features
+
+- **Product listing** — image, title, category, price, and rating with search, dynamic category filter, sort (price/rating), and pagination
+- **Product details** — dynamic route `/products/[id]`, metadata, and proper HTTP 404 for missing/invalid products
+- **Create product** — reusable validated form with accessible inline errors and DummyJSON `POST` simulation
+- **Edit product** — prefilled reusable form with DummyJSON `PUT` simulation
+- **Delete product** — confirmation dialog, DummyJSON `DELETE` simulation, and client-side listing updates
+- **UX / accessibility** — responsive layout from 360px, semantic structure, keyboard-accessible modal, loading/error/empty states
+
+## Tech stack
+
+- Next.js 16 (App Router, Cache Components / PPR)
+- React 19
+- TypeScript (strict)
+- Tailwind CSS v4
+- Yarn
+- React Hook Form + Zod
+- Lucide React
+- Sonner (toasts)
+- DummyJSON REST API
+
+## Requirements
+
+- Node.js 20+ recommended
+- Yarn 1.x (`packageManager` is set to `yarn@1.22.22`)
+
+No environment variables are required. API settings live in `src/config/app.config.ts`.
+
+## Installation
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+yarn install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Development
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+yarn dev
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Open [http://localhost:3000](http://localhost:3000).
 
-## Learn More
+## Scripts
 
-To learn more about Next.js, take a look at the following resources:
+| Command | Description |
+| --- | --- |
+| `yarn dev` | Start the development server |
+| `yarn build` | Create a production build |
+| `yarn start` | Serve the production build |
+| `yarn lint` | Run ESLint |
+| `yarn typecheck` | Run TypeScript (`tsc --noEmit`) |
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Build
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```bash
+yarn build
+yarn start
+```
 
-## Deploy on Vercel
+## API source
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+All product data comes from **DummyJSON**:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Base URL: `https://dummyjson.com`
+- Products: `/products`
+- Categories: `/products/categories`
+
+## Important: DummyJSON mock persistence
+
+DummyJSON **simulates** create, update, and delete responses. Mutations are **not** permanently stored on the server.
+
+- After create/update/delete, a refresh may restore original DummyJSON data.
+- The UI communicates this clearly in toasts and dialogs.
+- Delete removes items from the current client-side listing session only.
+- Create/update do not permanently appear in subsequent API fetches.
+
+## Project structure
+
+```text
+src/
+  app/                 # App Router pages and layouts
+  config/              # Application configuration
+  features/products/   # Product feature (components, hooks, service, types)
+  shared/              # Shared UI and utilities
+  proxy.ts             # Request-time validation for product 404 status codes
+```
+
+## License
+
+Private assessment project.
